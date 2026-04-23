@@ -8,59 +8,58 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: #fff;
-  color: #1e293b;
+  color: #171923;
 }
 
-/* ── Top bar ── */
+/* ── Dark top nav (Airtable workspace bar) ── */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 48px;
-  padding: 0 16px;
-  border-bottom: 1px solid #e2e8f0;
-  background: #fff;
+  height: 44px;
+  padding: 0 14px;
+  background: #1b1d22;
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 20;
 }
 
 .topLeft {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
 }
 
 .logoIcon {
-  font-size: 20px;
-  color: #3b82f6;
+  font-size: 18px;
+  color: #2d7ff9;
   line-height: 1;
 }
 
 .logoText {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  color: #1e293b;
-  letter-spacing: -0.02em;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .divider {
   width: 1px;
-  height: 18px;
-  background: #e2e8f0;
+  height: 16px;
+  background: #3a3d45;
 }
 
 .tableName {
   font-size: 13px;
-  font-weight: 600;
-  color: #475569;
+  font-weight: 500;
+  color: #b8bcc8;
 }
 
 .topRight {
@@ -78,25 +77,27 @@
 .searchIcon {
   position: absolute;
   left: 8px;
-  color: #94a3b8;
+  color: #6b7280;
   font-size: 16px;
   pointer-events: none;
 }
 
 .searchInput {
   padding: 5px 28px 5px 26px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border: 1px solid #3a3d45;
+  border-radius: 5px;
   font-size: 13px;
-  color: #374151;
-  background: #f8fafc;
+  font-family: inherit;
+  color: #e5e7eb;
+  background: #2a2d35;
   outline: none;
-  width: 220px;
+  width: 200px;
   transition: border-color 0.15s, background 0.15s;
 }
+.searchInput::placeholder { color: #6b7280; }
 .searchInput:focus {
-  border-color: #3b82f6;
-  background: #fff;
+  border-color: #2d7ff9;
+  background: #2a2d35;
 }
 
 .clearSearch {
@@ -105,36 +106,41 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #94a3b8;
-  font-size: 12px;
+  color: #6b7280;
+  font-size: 11px;
   padding: 2px;
+  line-height: 1;
 }
-.clearSearch:hover { color: #475569; }
+.clearSearch:hover { color: #9ca3af; }
 
 .toolbarBtn {
   display: flex;
   align-items: center;
   gap: 5px;
   padding: 5px 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  background: #fff;
+  border: 1px solid #3a3d45;
+  border-radius: 5px;
+  background: transparent;
   font-size: 12px;
+  font-family: inherit;
   font-weight: 500;
-  color: #475569;
+  color: #c9cdd8;
   cursor: pointer;
   transition: background 0.1s, border-color 0.1s;
 }
-.toolbarBtn:hover { background: #f8fafc; }
+.toolbarBtn:hover {
+  background: #2a2d35;
+  border-color: #4a4e58;
+}
 .toolbarBtnActive {
-  background: #eff6ff;
-  border-color: #3b82f6;
-  color: #1d4ed8;
+  background: #1c3557;
+  border-color: #2d7ff9;
+  color: #60a5fa;
 }
 
 .pillCount {
-  background: #e2e8f0;
-  color: #475569;
+  background: #3a3d45;
+  color: #9ca3af;
   font-size: 10px;
   font-weight: 600;
   border-radius: 8px;
@@ -144,9 +150,101 @@
 .filterIndicator {
   font-size: 11px;
   font-weight: 500;
-  color: #3b82f6;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  color: #60a5fa;
+  background: #1c3557;
+  border: 1px solid #2d5fa8;
+  border-radius: 10px;
+  padding: 2px 8px;
+}
+
+/* ── View tab bar (Airtable's view switcher strip) ── */
+.viewBar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  background: #fff;
+  border-bottom: 1px solid #dde1e6;
+  flex-shrink: 0;
+  gap: 0;
+}
+
+.viewTab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  height: 100%;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #666b7e;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.1s;
+  white-space: nowrap;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: inherit;
+}
+.viewTab:hover { color: #2d7ff9; }
+.viewTabActive {
+  color: #2d7ff9;
+  border-bottom-color: #2d7ff9;
+  font-weight: 600;
+}
+
+.viewTabIcon {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* ── Toolbar strip (Fields / filter indicator) ── */
+.tableToolbarStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 14px;
+  background: #fff;
+  border-bottom: 1px solid #dde1e6;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.toolbarStripLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toolbarStripBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 12.5px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #666b7e;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.toolbarStripBtn:hover { background: #f2f4f8; }
+.toolbarStripBtnActive {
+  background: #e8f0fe;
+  color: #1a56db;
+}
+
+.filterActivePill {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1a56db;
+  background: #e8f0fe;
   border-radius: 10px;
   padding: 2px 8px;
 }
@@ -165,21 +263,21 @@
   overflow: hidden;
 }
 
-.tableToolbar {
+.rowCountBar {
   display: flex;
   align-items: center;
-  padding: 6px 14px;
-  border-bottom: 1px solid #f1f5f9;
-  background: #fafafa;
+  padding: 4px 14px;
+  border-bottom: 1px solid #f2f4f8;
+  background: #fafbfd;
   flex-shrink: 0;
 }
 
 .rowCount {
-  font-size: 12px;
-  color: #64748b;
+  font-size: 11.5px;
+  color: #8b8fa4;
   font-weight: 500;
 }
 
 .rowCountSub {
-  color: #94a3b8;
+  color: #b0b4c4;
 }

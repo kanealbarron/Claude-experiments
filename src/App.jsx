@@ -21,7 +21,6 @@ export default function App() {
   const [filters, setFilters] = useState(EMPTY_FILTERS);
   const [search, setSearch] = useState('');
 
-  // Attach reorder as a method so DataTable can call columns.reorder(fromIdx, toIdx)
   const columnAPI = useMemo(() => {
     const arr = [...columns];
     arr.reorder = (fromIdx, toIdx) => {
@@ -78,6 +77,7 @@ export default function App() {
 
   return (
     <div className={styles.app}>
+      {/* Dark workspace nav */}
       <header className={styles.topbar}>
         <div className={styles.topLeft}>
           <div className={styles.logo}>
@@ -92,7 +92,7 @@ export default function App() {
             <span className={styles.searchIcon}>⌕</span>
             <input
               className={styles.searchInput}
-              placeholder="Search all fields…"
+              placeholder="Search…"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -100,24 +100,62 @@ export default function App() {
               <button className={styles.clearSearch} onClick={() => setSearch('')}>✕</button>
             )}
           </div>
+        </div>
+      </header>
+
+      {/* View tab strip */}
+      <div className={styles.viewBar}>
+        <button className={`${styles.viewTab} ${styles.viewTabActive}`}>
+          <span className={styles.viewTabIcon}>⊟</span>
+          Grid view
+        </button>
+        <button className={styles.viewTab}>
+          <span className={styles.viewTabIcon}>⊡</span>
+          Gallery
+        </button>
+        <button className={styles.viewTab}>
+          <span className={styles.viewTabIcon}>≡</span>
+          List
+        </button>
+      </div>
+
+      {/* Toolbar strip */}
+      <div className={styles.tableToolbarStrip}>
+        <div className={styles.toolbarStripLeft}>
           <button
-            className={`${styles.toolbarBtn} ${showColumnMgr ? styles.toolbarBtnActive : ''}`}
+            className={`${styles.toolbarStripBtn} ${showColumnMgr ? styles.toolbarStripBtnActive : ''}`}
             onClick={() => setShowColumnMgr(v => !v)}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
               <rect x="1" y="1" width="4" height="12" rx="1" stroke="currentColor" strokeWidth="1.5" />
               <rect x="9" y="1" width="4" height="12" rx="1" stroke="currentColor" strokeWidth="1.5" />
             </svg>
-            Fields
-            <span className={styles.pillCount}>{columns.filter(c => c.visible).length}/{columns.length}</span>
-          </button>
-          {activeFilterCount > 0 && (
-            <span className={styles.filterIndicator}>
-              {activeFilterCount} filter{activeFilterCount > 1 ? 's' : ''} active
+            Hide fields
+            <span style={{ fontSize: 10, opacity: 0.7 }}>
+              {columns.filter(c => !c.visible).length > 0
+                ? `${columns.filter(c => !c.visible).length} hidden`
+                : ''}
             </span>
-          )}
+          </button>
+
+          <button className={styles.toolbarStripBtn}>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2 4h10M4 7h6M6 10h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+            Filter
+            {activeFilterCount > 0 && (
+              <span className={styles.filterActivePill}>{activeFilterCount}</span>
+            )}
+          </button>
+
+          <button className={styles.toolbarStripBtn}>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2 4h10M5 7l2-3 2 3M5 10l2 3 2-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Sort
+          </button>
         </div>
-      </header>
+      </div>
 
       {showColumnMgr && (
         <ColumnManager
@@ -134,7 +172,7 @@ export default function App() {
           onReset={() => setFilters(EMPTY_FILTERS)}
         />
         <div className={styles.tableArea}>
-          <div className={styles.tableToolbar}>
+          <div className={styles.rowCountBar}>
             <span className={styles.rowCount}>
               {filteredRows.length} record{filteredRows.length !== 1 ? 's' : ''}
               {filteredRows.length !== ROWS.length && (
